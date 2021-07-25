@@ -6,7 +6,7 @@ difference() {
     translate([-36,0,-.1])
     cube_center([15.1, 19.0, 5]);
     
-    translate([9.5,2.5,-.1])
+    translate([9.5,1,-.1])
     cube_center([54, 17, 5]);
 }
 
@@ -68,7 +68,7 @@ for(s=[-1,1])
 }
 
 
-translate([10,H/2-1,45.5])
+translate([10,H/2-2,45.5])
 rotate([90,90,0])
 raspberrypi();
 
@@ -89,7 +89,7 @@ module raspberrypi() {
 
 module standoff() {
     difference() {
-        cylinder(d1=8,d2=6,h=5,$fn=32);
+        cylinder(d1=8,d2=6,h=5.5,$fn=32);
         cylinder(d=4.0,h=10, $fn=32);
     }
 }
