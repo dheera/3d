@@ -5,6 +5,7 @@ T=2;
 SD=4.76+1; // screw diameter
 
 //intersection() {
+//difference() {
     
 difference() {
     union() {
@@ -36,20 +37,36 @@ module puzzle() {
     translate([0,-250,-1])
     cube([500,500,100]);
 
-    for(s=[-3,-1,1,3])
+    for(s=[-1,1])
         translate([0,s*6,0])
-    scale([1.5,1,1])
-    cylinder(d=4.5,h=100,$fn=3); // 4.5 for difference, 4.3 for intersection
+    scale([1,1,1])
+    cylinder(d=6,h=100,$fn=3); // 6 for difference, 5 for intersection
     
 }
 
 module plus() {
-    cube_center([10,H,12]);
+    cube_center([10,H-5,12]);
+    
+    translate([0,-18.5,0])
+    cube_center([10,2,50]);
+    
+    intersection() {
+    translate([0,0,0])
+    cube_center([10,39,50]);
+        
+        
+    translate([0,-17.5,12])
+rotate([0,-90,0])
+    linear_extrude(height=106+4, center=true)
+    polygon(points =[[55-12-5,0], [0,35+2], [0,0]], paths=[[0,1,2]]);
+        
+    }
 }
 
 module minus() {
-    for(s=[-1,0,1])
-        translate([0,s*12,0]) {
+    
+    for(s=[-1,1]) for(t=[0,1])
+        translate([0,s*12,t*30]) {
             
             
     translate([0,0,6])
@@ -95,9 +112,15 @@ rotate([0,-90,0])
 }
 
 module trayminus() {
-    cube_center([106+.5,35.5,10]);
+    //cube_center([106+.5,35.5,10]);
     
-    translate([0,0,10])
+    for(s=[-1,1])
+    translate([s*(106/2-1),0,10 ])
+    scale([.5,1,1])
+    rotate([90,0,0])
+    cylinder(d=3,h=20, center=true,$fn=32);
+    
+    translate([0,0,0])
     minkowski() {
         cube_center([106+.5-2,35-2,2]);
         rotate([0,0,45])
@@ -109,9 +132,9 @@ module trayminus() {
         
         for(s=[-1,1])
         difference() {
-        translate([0,10*s,0]) {
+        translate([0,6*s,0]) {
             cube_center([106+2,3-.4,100]);}
-            translate([0,10*s,0]) {
+            translate([0,6*s,0]) {
             cube_center([104+.4,10,100]);
         }
         }
