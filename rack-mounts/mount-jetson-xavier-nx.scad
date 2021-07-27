@@ -50,10 +50,10 @@ xaviernxminus();
 
 difference() {
     union() {
-        cube_center([W,H,10-.15]);
-    translate([0,0,10-.15])
+        cube_center([W,H,0]);
+    translate([0,0,1])
     minkowski() {
-        cube_center([W-2,H-2,2]);
+        cube_center([W-2,H-2,1.6]);
         rotate([0,0,45])
         cylinder(d1=2*sqrt(2),d2=0,h=2/sqrt(2),$fn=4);
     }
@@ -72,12 +72,20 @@ difference() {
     // side panels
 for(s=[-1,1])
     scale([s,1,1]) {
+        
+         for(t=[-1,1])
+    translate([t*(106/2-1.7),0,10 ])
+    scale([.5,1,1])
+    rotate([90,0,0])
+    cylinder(d=3,h=20, center=true,$fn=32);
+         
+         
         difference() {
     translate([W/2-1,0,0])
     cube_center([2,H,90]);
             // rails
             for(t=[-1,1])
-    translate([W/2-1+2-1,t*10,0])
+    translate([W/2-1+2-1,t*6,0])
     cube_center([2,3,90]);
             
         }
